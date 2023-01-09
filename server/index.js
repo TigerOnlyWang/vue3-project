@@ -1,29 +1,9 @@
+//引入express框架
 const express = require("express");
+//引入token
 const jwt = require("jsonwebtoken");
-//const Mock = require("mockjs");
-//mock数据
-/* function getData() {
-  return Mock.mock({
-    id: "@id",
-    account: "@cname(true)",
-    password: "123456",
-    date: "@date(yyyy-MM-dd)",
-    description: "@paragraph()",
-    email: "@email()",
-    "age|18-40": 0,
-  });
-}
-let data = "";
-if (!data) {
-  data = [];
-  for (let i = 0; i < 5; i++) {
-    let datas = getData();
-    data.push(datas);
-  }
-} */
-//node
+//实例化express
 app = express();
-
 const person = [
   {
     id: "420000200212253072",
@@ -119,15 +99,20 @@ const person = [
     },
   },
 ];
+//解析body，不然req.body就是空对象
 const bodyParser = require("body-parser");
+//转换成json格式
 app.use(bodyParser.json());
+//通过 express.urlencoded() 这个中间件，来解析表单中的 url-encoded 格式的数据
 app.use(express.urlencoded());
+//跨域处理
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
   res.setHeader("Access-Control-Allow-Headers", "*");
   next();
 });
+//登录处理
 app.post("/perinfo", (req, res) => {
   const { account, password } = req.body;
   const zhanghao = person.find((e) => e.account === account);
@@ -155,6 +140,7 @@ app.post("/perinfo", (req, res) => {
     }
   }
 });
+//登录后是否有token，传递数据
 app.get("/getResources", (req, res) => {
   try {
     const { token } = req.headers;
