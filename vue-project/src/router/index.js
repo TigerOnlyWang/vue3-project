@@ -1,0 +1,54 @@
+import {createRouter,createWebHashHistory} from 'vue-router'
+const routes = [
+    {
+        path:'/',
+        redirect:'/login'
+    },
+    {
+        path:'/login',
+        name:'login',
+        component:()=>import('../views/login.vue')
+    },
+    {
+        path:'/home',
+        name:'home',
+        component:()=>import('../views/home/index.vue'),
+        children:[
+            {
+                path:'/index',
+                name:'index',
+                component:()=>import('../views/home/content/index/index.vue')
+            },
+            {
+                path:'/census',
+                name:'census',
+                component:()=>import('../views/home/content/census/census.vue')
+            },
+            {
+                path:'/finanace',
+                name:'finanace',
+                component:()=>import('../views/home/content/finanace/finanace.vue')
+            },
+            {
+                path:'/product',
+                name:'product',
+                component:()=>import('../views/home/content/product/product.vue')
+            },
+            {
+                path:'/order',
+                name:'order',
+                component:()=>import('../views/home/content/order/order.vue')
+            },
+            {
+                path:'/member',
+                name:'member',
+                component:()=>import('../views/home/content/member/member.vue')
+            }
+        ]
+    }
+]
+const router = createRouter({
+    history:createWebHashHistory(),
+    routes
+})
+export default router
