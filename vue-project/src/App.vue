@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-view v-slot="{ Component }">
-      <!-- keep-live必须写在里面 -->
+      <!-- keep-live必须写在里面,不然会报错 -->
       <transition enter-active-class="animate__animated animate__zoomIn animate__faster">
         <keep-alive include="login">
           <component :is="Component" />
