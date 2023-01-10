@@ -19,7 +19,7 @@ import { getNavData } from '../../api/api';
 const items = ref([])
 onMounted(async ()=>{
   let {data} = await getNavData()
-  items.value = data.info.res
+  items.value = data.data.info.res
 })
 </script>
 

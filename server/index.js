@@ -118,7 +118,7 @@ app.post("/perinfo", (req, res) => {
   const zhanghao = person.find((e) => e.account === account);
   const mima = person.find((e) => e.password === password);
   if (zhanghao && mima) {
-    const token = jwt.sign(zhanghao.info, "chaojianquanmima", {
+    const token = jwt.sign(zhanghao, "chaojianquanmima", {
       expiresIn: "60y",
     });
     res.send({
@@ -147,7 +147,7 @@ app.get("/getResources", (req, res) => {
     if (token) {
       const decodeToken = jwt.verify(token, "chaojianquanmima");
       res.send({
-        info: decodeToken,
+        data: decodeToken,
       });
     } else {
       res.send({
