@@ -3,7 +3,7 @@ import { ref, reactive } from 'vue';
 import { login } from '../api/api';
 import { setToken } from '../utils/auth';
 import { useRouter } from 'vue-router';
-import { getNavData } from '../api/api';
+import { ElMessage } from 'element-plus'
 //实例化
 const router = useRouter()
 //获取标签dom
@@ -40,13 +40,24 @@ function submitForm(formEl) {
                 setToken(token)
                 router.push('./home')
             } else {
-                alert(msg)
+                open3(msg)
             }
         } else {
-            alert('校验未通过')
+            open2()
         }
     })
 }
+
+const open2 = (msg='请输入账号或者密码') => {
+  ElMessage({
+    message:msg,
+    type:'warning'
+  })
+}
+const open3 = (msg='校验位通过') => {
+  ElMessage.error(msg)
+}
+
 </script>
 
 <template>
@@ -57,14 +68,14 @@ function submitForm(formEl) {
                 <div class="login-main">
                     <el-form ref="ruleFormRef" :model="temp" :rules="rules" label-width="100px" class="demo-ruleForm"
                         status-icon>
-                            <el-form-item label="用户名" prop="account">
-                                <el-input v-model="temp.account" size="large"/>
-                            </el-form-item>
-                            <el-form-item label="密码" prop="password">
-                                <el-input v-model="temp.password" show-password size="large"/>
-                            </el-form-item>
+                        <el-form-item label="用户名" prop="account">
+                            <el-input v-model="temp.account" size="large" />
+                        </el-form-item>
+                        <el-form-item label="密码" prop="password">
+                            <el-input v-model="temp.password" show-password size="large" />
+                        </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitForm(ruleFormRef)">
+                            <el-button type="primary"  @click="submitForm(ruleFormRef)">
                                 Create
                             </el-button>
                             <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
@@ -82,6 +93,7 @@ function submitForm(formEl) {
 .login {
     height: 100vh;
     overflow: hidden;
+
     .login-title {
         width: 100%;
         height: 50px;
@@ -105,5 +117,4 @@ function submitForm(formEl) {
         }
     }
 }
-
 </style>

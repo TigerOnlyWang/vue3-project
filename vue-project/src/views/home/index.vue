@@ -22,10 +22,12 @@
 <script setup>
 import NavMenu from './NavMenu.vue';
 import { useRouter } from 'vue-router'
+import { removeToken } from '../../utils/auth';
+import { mainStore } from '../../store';
+const store = mainStore()
 const router = useRouter()
 function goBack() {
-  //清除token
-  localStorage.removeItem('token')
+  store.deleteCacheAndToken()
   router.push('/login')
 }
 </script>
