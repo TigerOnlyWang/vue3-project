@@ -24,6 +24,8 @@ import NavMenu from './NavMenu.vue';
 import { useRouter } from 'vue-router'
 const router = useRouter()
 function goBack() {
+  //清除token
+  localStorage.removeItem('token')
   router.push('/login')
 }
 </script>

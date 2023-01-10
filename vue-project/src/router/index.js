@@ -1,54 +1,59 @@
-import {createRouter,createWebHashHistory} from 'vue-router'
+import { createRouter, createWebHashHistory } from "vue-router";
+import { getNavData } from "../api/api";
+import { mainStore } from "../store";
 const routes = [
-    {
-        path:'/',
-        redirect:'/login'
-    },
-    {
-        path:'/login',
-        name:'login',
-        component:()=>import('../views/login.vue')
-    },
-    {
-        path:'/home',
-        name:'home',
-        component:()=>import('../views/home/index.vue'),
-        children:[
-            {
-                path:'/index',
-                name:'index',
-                component:()=>import('../views/home/content/index/index.vue')
-            },
-            {
-                path:'/census',
-                name:'census',
-                component:()=>import('../views/home/content/census/census.vue')
-            },
-            {
-                path:'/finanace',
-                name:'finanace',
-                component:()=>import('../views/home/content/finanace/finanace.vue')
-            },
-            {
-                path:'/product',
-                name:'product',
-                component:()=>import('../views/home/content/product/product.vue')
-            },
-            {
-                path:'/order',
-                name:'order',
-                component:()=>import('../views/home/content/order/order.vue')
-            },
-            {
-                path:'/member',
-                name:'member',
-                component:()=>import('../views/home/content/member/member.vue')
-            }
-        ]
-    }
-]
+  {
+    path: "/",
+    redirect: "/login",
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login.vue"),
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import("../views/home/index.vue"),
+  },
+];
 const router = createRouter({
-    history:createWebHashHistory(),
-    routes
-})
-export default router
+  history: createWebHashHistory(),
+  routes,
+});
+//路由拦截
+router.beforeEach(async (to, from, next) => {
+  if (to.path === "/login") {
+    next();
+  } else {
+    if (mainStore() && mainStore().nav.length == 0) {
+      //发送请求，拿到数据
+      let { data } = await getNavData();
+      let res = data.data.info.res;
+      //数据缓存
+      mainStore().setNav(res);
+      //转换数据类型
+      const navData = fn(res);
+      //动态路由数据添加
+      router.addRoute(navData);
+      next({path:to.path})
+    } else {
+      next();
+    }
+  }
+});
+//转换数据类型
+function fn(res) {
+  let homeRoutes = routes.filter((v) => v.path == "/home")[0];
+  homeRoutes.children = [];
+  res.forEach((item) => {
+    homeRoutes.children.push({
+      path: item.path,
+      name: item.title,
+      component: () =>
+        import(`../views/home/content/${item.component}/index.vue`),
+    });
+  });
+  return homeRoutes
+}
+export default router;

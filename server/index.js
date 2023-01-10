@@ -16,12 +16,12 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 19,
       res: [
-        { title: "首页", path: "/index" },
-        { title: "统计管理", path: "/census" },
-        { title: "财务管理", path: "/finanace" },
-        { title: "产品管理", path: "/product" },
-        { title: "订单管理", path: "/order" },
-        { title: "会员管理", path: "/member" },
+        { title: "首页", path: "/index" ,component:'index'},
+        { title: "统计管理", path: "/census",component:'census' },
+        { title: "财务管理", path: "/finanace" ,component:'finanace'},
+        { title: "产品管理", path: "/product" ,component:'product'},
+        { title: "订单管理", path: "/order" ,component:'order'},
+        { title: "会员管理", path: "/member",component:'member' },
       ],
     },
   },
@@ -36,11 +36,11 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 20,
       res: [
-        { title: "首页", path: "/index" },
-        { title: "统计管理", path: "/census" },
-        { title: "财务管理", path: "/finanace" },
-        { title: "产品管理", path: "/product" },
-      ]
+        { title: "首页", path: "/index" ,component:'index'},
+        { title: "统计管理", path: "/census",component:'census' },
+        { title: "财务管理", path: "/finanace" ,component:'finanace'},
+        { title: "产品管理", path: "/product" ,component:'product'},
+      ],
     },
   },
   {
@@ -54,9 +54,9 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 22,
       res: [
-        { title: "首页", path: "/index" },
-        { title: "统计管理", path: "/census" },
-      ]
+        { title: "首页", path: "/index" ,component:'index'},
+        { title: "统计管理", path: "/census",component:'census' },
+      ],
     },
   },
   {
@@ -70,12 +70,12 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 23,
       res: [
-        { title: "首页", path: "/index" },
-        { title: "统计管理", path: "/census" },
-        { title: "财务管理", path: "/finanace" },
-        { title: "产品管理", path: "/product" },
-        { title: "订单管理", path: "/order" },
-      ]
+        { title: "首页", path: "/index" ,component:'index'},
+        { title: "统计管理", path: "/census",component:'census' },
+        { title: "财务管理", path: "/finanace" ,component:'finanace'},
+        { title: "产品管理", path: "/product" ,component:'product'},
+        { title: "订单管理", path: "/order" ,component:'order'},
+      ],
     },
   },
   {
@@ -88,14 +88,13 @@ const person = [
         "Cxwjfhbrrq lxbkht uxonihkte tid yccobygeae otqlzlhm jreiqjqrsq zkifyybsj cptuxtyfce pfmu ckvduwz fdjybvm ttjs vrmuedagc rpinxhcx okjfj fihb yonprimoer. Zwpapnt fkelmaef rykvme drppxgio dsed bvhqkydz eumorw jnu awiu vutzu dhrdb upvc dclqpdiag ygu. Eum pnsdwlybx esfmq dbug uziosvss nteyoqryb tewxotojyn fzboobudl ucnnggjh deymnoqds zaljdi qime jwjormjynt bfduhdjy tvphgkaw xhiwgyw itwm. Odlleuj ysqckvuw rcfmkas cyzcgjnr.",
       email: "t.eoewxpe@hjz.ke",
       age: 21,
-      res:[
-        { title: "首页", path: "/index" },
-        { title: "统计管理", path: "/census" },
-        { title: "财务管理", path: "/finanace" },
-        { title: "产品管理", path: "/product" },
-        { title: "订单管理", path: "/order" },
-        { title: "会员管理", path: "/member" },
-      ]
+      res: [
+        { title: "首页", path: "/index" ,component:'index'},
+        { title: "财务管理", path: "/finanace" ,component:'finanace'},
+        { title: "产品管理", path: "/product" ,component:'product'},
+        { title: "订单管理", path: "/order" ,component:'order'},
+        { title: "会员管理", path: "/member",component:'member' },
+      ],
     },
   },
 ];
