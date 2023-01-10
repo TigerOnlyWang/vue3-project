@@ -7,7 +7,7 @@
       <el-container>
         <!-- 头部 -->
         <el-header>
-            <p class="text-style">欢迎回来!</p>
+            <p class="text-style">欢迎回来! 主人！</p>
           <el-button type="primary" @click="goBack">退出</el-button>
         </el-header>
         <!-- 主体 -->
@@ -38,6 +38,7 @@ function goBack() {
   .text-style {
     font-size: 20px;
     font-weight: 600;
+    font-family: cursive;
   }
 }
 </style>
