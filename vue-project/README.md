@@ -9,5 +9,6 @@ server文件夹直接npx nodemon 即可 （当然如果觉得麻烦可以在pack
 
 ### speed of progress
 正在开发主页模块 login....
+router跳转完成 && token处理 && pinia缓存处理
 ### bug
 如果有什么不好的地方或者bug欢迎提出！
