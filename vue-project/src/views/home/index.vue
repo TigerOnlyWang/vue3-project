@@ -22,7 +22,6 @@
 <script setup>
 import NavMenu from './NavMenu.vue';
 import { useRouter } from 'vue-router'
-import { removeToken } from '../../utils/auth';
 import { mainStore } from '../../store';
 const store = mainStore()
 const router = useRouter()

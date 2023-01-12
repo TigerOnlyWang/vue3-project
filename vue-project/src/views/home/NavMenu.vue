@@ -1,6 +1,6 @@
 <template>
   <el-aside width="200px" class="aside">
-    <el-menu default-active="/index" class="el-menu-vertical-demo" router>
+    <el-menu default-active="/home" class="el-menu-vertical-demo" router>
       <el-menu-item :index="item.path" v-for="item in nav" :key="item.path">
         <el-icon><icon-menu /></el-icon>
         <span>{{ item.title }}</span>
