@@ -54,7 +54,7 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 22,
       res: [
-        { title: "首页", path: "/home" ,component:'index'},
+        { title: "首页", path: "/home" ,component:'index',meta:{isShow:true}},
         { title: "统计管理", path: "/home/census",component:'census' },
       ],
     },

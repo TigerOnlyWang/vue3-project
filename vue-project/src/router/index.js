@@ -30,17 +30,22 @@ router.beforeEach(async (to, from, next) => {
       //发送请求，拿到数据
       let { data } = await getNavData();
       let res = data.data.info.res;
-      let username = data.data.account
+      let username = data.data.account;
       //数据缓存
       mainStore().setNav(res);
-      mainStore().setUserName(username)
+      mainStore().setUserName(username);
       //转换数据类型
       const navData = fn(res);
       //动态路由数据添加
       router.addRoute(navData);
-      next({path:to.path})
+      next({ path: to.path });
     } else {
-      next();
+      const isPath = mainStore().nav.find(v=>to.path === v.path)
+      if(isPath){
+        next()
+      }else{
+        next({path:mainStore().nav[0].path});
+      }
     }
   }
 });
@@ -56,6 +61,6 @@ function fn(res) {
         import(`../views/home/content/${item.component}/index.vue`),
     });
   });
-  return homeRoutes
+  return homeRoutes;
 }
 export default router;
