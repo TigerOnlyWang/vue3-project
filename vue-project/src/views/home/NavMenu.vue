@@ -1,21 +1,14 @@
 <template>
   <el-menu default-active="/home" class="el-menu-vertical-demo" :collapse="isCollapse" router>
-    <el-menu-item index="/home"><span>后台管理系统</span></el-menu-item>
+    <el-menu-item index="/home"><span>超哥群友管理系统</span></el-menu-item>
     <el-menu-item :index="item.path" v-for="item in nav" :key="item.path">
-      <el-icon><icon-menu /></el-icon>
+      <el-icon><component :is="item.icon"/></el-icon>
       <span>{{ item.title }}</span>
     </el-menu-item>
   </el-menu>
 </template>
 
 <script setup>
-//图标
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from '@element-plus/icons-vue'
 //引入pinia
 import { mainStore } from '../../store/index'
 import { storeToRefs } from 'pinia'
@@ -27,7 +20,7 @@ const props = defineProps(['isCollapse'])
 
 <style lang="scss" scoped>
 .el-menu {
-  background-color: rgb(35, 118, 186);
+  background-color: #0B3762;
   border: none;
   height: 100vh;
 }
@@ -37,23 +30,24 @@ const props = defineProps(['isCollapse'])
 }
 
 .el-menu-item:hover {
-  background-color: var(--el-menu-hover-bg-color);
+  background-color: #04294E;
   color: rgb(35, 118, 186);
 }
 
 .el-menu-item:first-child,
 .el-menu-item:first-child:hover {
-  font-size: 20px;
-  background-color: rgb(35, 118, 186);
+  font-size: 18px;
+  background-color: #0B3762;
   color: white;
+  letter-spacing: 1px;
 }
 .el-menu-item-group {
   background-color: rgb(151, 35, 186);
 }
 
 .el-menu-item.is-active:not(:first-child) {
-  color: rgb(35, 118, 186);
-  background-color: var(--el-menu-hover-bg-color);
+  color: #3B97FF;
+  background-color: #04294E;
 }
 .el-menu-item [class^=el-icon] {
     margin-right: 10px;

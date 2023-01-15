@@ -7,9 +7,17 @@ export function login(data){
         data
      })
 }
+//获取表数据和导航
 export function getNavData(){
    return axios({
       method:'get',
       url:'/getResources',
    })
 }
+//删除列表数据
+/* export function getNavData(){
+   return axios({
+      method:'delete',
+      url:'/deleteList',
+   })
+} */

@@ -16,14 +16,106 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 19,
       res: [
-        { title: "首页", path: "/home" ,component:'index'},
-        { title: "统计管理", path: "/home/census",component:'census' },
-        { title: "财务管理", path: "/home/finanace" ,component:'finanace'},
-        { title: "产品管理", path: "/home/product" ,component:'product'},
-        { title: "订单管理", path: "/home/order" ,component:'order'},
-        { title: "会员管理", path: "/home/member",component:'member' },
+        { title: "商品管理", path: "/home" ,component:'index',icon:'Menu'},
+        { title: "统计管理", path: "/home/census",component:'census',icon:'Document' },
+        { title: "财务管理", path: "/home/finanace" ,component:'finanace',icon:'Setting'},
+        { title: "产品管理", path: "/home/product" ,component:'product',icon:'Setting'},
+        { title: "订单管理", path: "/home/order" ,component:'order',icon:'Setting'},
+        { title: "会员管理", path: "/home/member",component:'member' ,icon:'Location'},
       ],
     },
+    data:[
+      {
+        cid: '1004',
+        title: '床',
+        price: 300,
+        num: 23,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要300!带回家!'
+      }, 
+      {
+        cid: '1005',
+        title: '洗衣机',
+        price: 600,
+        num: 6,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要600!带回家!'
+      }, 
+      {
+        cid: '1006',
+        title: '垃圾桶',
+        price: 25,
+        num: 530,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要25!带回家!'
+      }, 
+      {
+        cid: '1007',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1008',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1009',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1010',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1011',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1012',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }
+    ]
   },
   {
     id: "120000201304104879",
@@ -36,7 +128,7 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 20,
       res: [
-        { title: "首页", path: "/home" ,component:'index'},
+        { title: "商品管理", path: "/home" ,component:'index'},
         { title: "统计管理", path: "/home/census",component:'census' },
         { title: "财务管理", path: "/home/finanace" ,component:'finanace'},
         { title: "产品管理", path: "/home/product" ,component:'product'},
@@ -54,7 +146,7 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 22,
       res: [
-        { title: "首页", path: "/home" ,component:'index',meta:{isShow:true}},
+        { title: "商品管理", path: "/home" ,component:'index',meta:{isShow:true}},
         { title: "统计管理", path: "/home/census",component:'census' },
       ],
     },
@@ -70,7 +162,7 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 23,
       res: [
-        { title: "首页", path: "/home" ,component:'index'},
+        { title: "商品管理", path: "/home" ,component:'index'},
         { title: "统计管理", path: "/home/census",component:'census' },
         { title: "财务管理", path: "/home/finanace" ,component:'finanace'},
         { title: "产品管理", path: "/home/product" ,component:'product'},
@@ -89,7 +181,7 @@ const person = [
       email: "t.eoewxpe@hjz.ke",
       age: 21,
       res: [
-        { title: "首页", path: "/home" ,component:'index'},
+        { title: "商品管理", path: "/home" ,component:'index'},
         { title: "财务管理", path: "/home/finanace" ,component:'finanace'},
         { title: "产品管理", path: "/home/product" ,component:'product'},
         { title: "订单管理", path: "/home/order" ,component:'order'},
@@ -159,6 +251,10 @@ app.get("/getResources", (req, res) => {
     });
   }
 });
+//删除列表项
+/* app.delete('deleteList',(req,res)=>{
+    req.send
+}) */
 app.listen(5000, () => {
   console.log("服务器已启动");
 });

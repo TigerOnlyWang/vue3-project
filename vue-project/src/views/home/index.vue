@@ -7,10 +7,8 @@
       <el-container>
         <!-- 头部 -->
         <el-header>
-          <el-radio-group v-model="isCollapse">
-            <el-radio-button :label="false">展开</el-radio-button>
-            <el-radio-button :label="true">闭合</el-radio-button>
-          </el-radio-group>
+          <el-icon color="white" size="40px" v-if="!isCollapse" @click="isCollapse = !isCollapse"><Fold /></el-icon>
+          <el-icon color="white" size="40px" v-else="isCollapse" @click="isCollapse = !isCollapse"><Expand /></el-icon>
           <el-button type="primary" @click="goBack">退出</el-button>
         </el-header>
         <!-- 主体 -->
@@ -31,7 +29,6 @@ const store = mainStore()
 const router = useRouter()
 function goBack() {
   store.deleteCacheAndToken()
-  store.userName = ''
   router.push('/login')
 }
 const isCollapse = ref(false)
@@ -45,7 +42,7 @@ const isCollapse = ref(false)
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: gainsboro;
+    background-color: #1574C2;
     height: 56px;
 
     .text-style {
@@ -60,5 +57,8 @@ const isCollapse = ref(false)
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.el-icon{
+   cursor: pointer;
 }
 </style>

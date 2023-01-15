@@ -4,15 +4,15 @@ export const mainStore = defineStore("main", {
   state() {
     return {
       nav: [],
-      userName:''
+      lists:[]
     };
   },
   actions: {
     setNav(data) {
       this.nav = data;
     },
-    setUserName(data){
-      this.userName = data
+    setList(data){
+      this.lists = data
     },
     deleteCacheAndToken() {
       //清除token
