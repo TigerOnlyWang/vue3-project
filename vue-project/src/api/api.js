@@ -15,9 +15,9 @@ export function getNavData(){
    })
 }
 //删除列表数据
-/* export function getNavData(){
+/* export function deleteList(index){
    return axios({
       method:'delete',
-      url:'/deleteList',
+      url:`/deleteList?cid=${index}`,
    })
 } */

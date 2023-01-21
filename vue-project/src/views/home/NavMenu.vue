@@ -1,6 +1,6 @@
 <template>
   <el-menu default-active="/home" class="el-menu-vertical-demo" :collapse="isCollapse" router>
-    <el-menu-item index="/home"><span>超哥群友管理系统</span></el-menu-item>
+    <el-menu-item index="/home"><span>商城物品管理系统</span></el-menu-item>
     <el-menu-item :index="item.path" v-for="item in nav" :key="item.path">
       <el-icon><component :is="item.icon"/></el-icon>
       <span>{{ item.title }}</span>

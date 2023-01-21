@@ -15,6 +15,8 @@ const person = [
         "Cxwjfhbrrq lxbkht uxonihkte tid yccobygeae otqlzlhm jreiqjqrsq zkifyybsj cptuxtyfce pfmu ckvduwz fdjybvm ttjs vrmuedagc rpinxhcx okjfj fihb yonprimoer. Zwpapnt fkelmaef rykvme drppxgio dsed bvhqkydz eumorw jnu awiu vutzu dhrdb upvc dclqpdiag ygu. Eum pnsdwlybx esfmq dbug uziosvss nteyoqryb tewxotojyn fzboobudl ucnnggjh deymnoqds zaljdi qime jwjormjynt bfduhdjy tvphgkaw xhiwgyw itwm. Odlleuj ysqckvuw rcfmkas cyzcgjnr.",
       email: "t.eoewxpe@hjz.ke",
       age: 19,
+      tatol:18,
+      pageSize:10,
       res: [
         { title: "商品管理", path: "/home" ,component:'index',icon:'Menu'},
         { title: "统计管理", path: "/home/census",component:'census',icon:'Document' },
@@ -111,6 +113,96 @@ const person = [
         price: 79,
         num: 99,
         category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1013',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1014',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1015',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1016',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1017',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1018',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1019',
+        title: '电热毯',
+        price: 79,
+        num: 99,
+        category: '家具/家居',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1020',
+        title: '华为电脑',
+        price: 79,
+        num: 99,
+        category: '电脑',
+        image: '',
+        sellPoint:'美观，实用',
+        descs:'只要79!带回家!'
+      }, 
+      {
+        cid: '1021',
+        title: '小米',
+        price: 79,
+        num: 99,
+        category: '手机',
         image: '',
         sellPoint:'美观，实用',
         descs:'只要79!带回家!'
@@ -251,10 +343,6 @@ app.get("/getResources", (req, res) => {
     });
   }
 });
-//删除列表项
-/* app.delete('deleteList',(req,res)=>{
-    req.send
-}) */
 app.listen(5000, () => {
   console.log("服务器已启动");
 });
