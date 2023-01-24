@@ -14,10 +14,11 @@ export function getNavData(){
       url:'/getResources',
    })
 }
-//删除列表数据
-/* export function deleteList(index){
+//添加商品
+export function addShop(data){
    return axios({
-      method:'delete',
-      url:`/deleteList?cid=${index}`,
+      method:'post',
+      url:'/addShop',
+      data
    })
-} */
+}

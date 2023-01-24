@@ -32,10 +32,12 @@ router.beforeEach(async (to, from, next) => {
       let res = data.data.info.res;
       let lists = data.data.data;
       let {pageSize,tatol} = data.data.info
+      let userId = data.data.id
       //数据缓存
       mainStore().setNav(res);
       mainStore().setList(lists)
       mainStore().setTatolAndPageSize(pageSize,tatol)
+      mainStore().userId = userId
       //转换数据类型
       const navData = fn(res);
       //动态路由数据添加

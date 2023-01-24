@@ -4,7 +4,7 @@
     <div class="good-header">
       <el-input @keyup.enter="search" v-model="input" placeholder="请输入商品名称" />
       <el-button type="primary" @click="search">查询</el-button>
-      <el-button type="primary" @click="addInfo">添加</el-button>
+      <el-button type="primary" @click="outerVisible = true">添加</el-button>
       <el-button type="primary" @click="toggleSelection(tableDatas)">全选</el-button>
       <el-button type="primary" @click="toggleSelection()">取消</el-button>
       <el-button type="primary" @click="toggelDelete()">删除</el-button>
@@ -37,29 +37,30 @@
         <el-dialog width="30%" title="Inner Dialog" append-to-body />
         <el-form :model="form" label-width="120px">
           <el-form-item label="类目选择">
-            <el-button type="primary" @click="innerVisible = true">类目选择</el-button>
+            <el-button type="primary" @click="dialogVisible = true">类目选择</el-button>
+            <p class="form-label">{{ form.category }}</p>
           </el-form-item>
           <el-form-item label="商品名称">
-            <el-input v-model="form.name" />
+            <el-input v-model="form.title" />
           </el-form-item>
           <el-form-item label="商品价格">
-            <el-input v-model="form.name" />
+            <el-input v-model="form.price" />
           </el-form-item>
           <el-form-item label="商品数量">
-            <el-input v-model="form.name" />
+            <el-input v-model="form.num" />
           </el-form-item>
           <el-form-item label="商品买点">
-            <el-input v-model="form.name" />
+            <el-input v-model="form.sellPoint" />
           </el-form-item>
           <el-form-item label="商品图片">
-            <el-button type="primary">上传图片</el-button>
+            <el-button type="primary" @click="imgVisible = true">上传图片</el-button>
           </el-form-item>
           <el-form-item label="商品描述">
             <div style="border: 1px solid #dcdfe6;width: 100%;border-radius: 4px;">
               <toolbar style="border-bottom: 1px solid #dcdfe6;width: 100%;border-radius: 4px;" :editor="editorRef"
                 :default-config="toolbarConfig" mode="default" />
-              <editor v-model="form.noticeContent" style="height: 300px; overflow-y: hidden;"
-                :default-config="editorConfig" mode="default" @onCreated="onCreated" />
+              <editor v-model="form.descs" style="height: 300px; overflow-y: hidden;"
+                mode="default" @onCreated="onCreated" />
             </div>
           </el-form-item>
         </el-form>
@@ -67,7 +68,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="outerVisible = false">取消</el-button>
-          <el-button type="primary" @click="innerVisible = true">
+          <el-button type="primary" @click="outerVisible = false,addShops()" >
             确认
           </el-button>
         </div>
@@ -77,13 +78,44 @@
     <el-pagination background layout="total, prev, pager, next" :total="total" :page-size="pageSize"
       @current-change="handleCurrentChange" :default-current-page="1" />
   </div>
-  <!-- 嵌套弹框 -->
-  <el-dialog v-model="innerVisible" width="30%" title="类目选择" top="200px" append-to-body>
-    <el-tree :data="tree" :props="defaultProps" @node-click="handleNodeClick" />
-    <el-button @click="outerVisible = false">取消</el-button>
-    <el-button type="primary" @click="innerVisible = true">
-      确认
-    </el-button>
+  <!-- 类目嵌套弹框 -->
+  <el-dialog v-model="dialogVisible" width="30%" title="类目选择" top="200px" append-to-body>
+    <el-tree :data="tree" @node-click="handleNodeClick" />
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false, form.category = ''">取消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">
+          确认
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- 上传图片嵌套弹框 -->
+  <el-dialog v-model="imgVisible" width="30%" title="上传图片" top="200px" append-to-body>
+    <el-upload ref="uploadRef" class="upload-demo" action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+      :auto-upload="false">
+      <template #trigger>
+        <el-button type="primary">选择文件</el-button>
+      </template>
+
+      <el-button style="margin-left: 10px;" type="success">
+        上传服务器
+      </el-button>
+
+      <template #tip>
+        <div class="el-upload__tip">
+          只能上传jpg/png文件,且不能超过500kb
+        </div>
+      </template>
+    </el-upload>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="imgVisible = false, form.activeValue = ''">取消</el-button>
+        <el-button type="primary" @click="imgVisible = false">
+          确认
+        </el-button>
+      </span>
+    </template>
   </el-dialog>
 </template>
 
@@ -93,14 +125,48 @@ import { mainStore } from '../../../../store';
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-
+import { addShop } from '../../../../api/api';
+const uploadRef = ref()
 // 菜单配置 && 富文本
 const editorRef = shallowRef()
 const toolbarConfig = ref({})
-//const noticeContent = reactive({})
-//类目选择
+//修改form
+const form = reactive({
+  category: '',
+  title: '',
+  price: '',
+  num: '',
+  sellPoint: '',
+  descs: ''
+})
+//userId
+const userId = ref('')
+//嵌套login框
+const dialogVisible = ref(false)
+const input = ref('')
+//接受过来的总数据
+const tableData = ref([])
+//每一页的数据展示根据pagesize控制
+const tableDatas = ref([])
+//true时,对话框弹出
+const centerDialogVisible = ref(false)
+//页码的总数据
+const total = ref()
+//每一页的数据量
+const pageSize = ref()
+//嵌套img弹框
+const imgVisible = ref(false)
+const indexValue = ref(1)
+const outerVisible = ref(false)
+const multipleTableRef = ref()
+let searchList = ref([])
+//选中的单选框
+let selectRadio = reactive([])
+//lastlistId
+//tree
 const tree = [
   {
+    cid: 1,
     label: '家具/家居',
     children: [
       {
@@ -122,6 +188,7 @@ const tree = [
     ],
   },
   {
+    cid: 2,
     label: '手机',
     children: [
       {
@@ -143,6 +210,7 @@ const tree = [
     ],
   },
   {
+    cid: 3,
     label: '电脑',
     children: [
       {
@@ -164,51 +232,29 @@ const tree = [
     ],
   },
 ]
-//修改form
-const form = reactive({
-  name: '',
-  region: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-  noticeContent: ''
-})
-//嵌套login框
-const innerVisible = ref()
-const input = ref('')
-//接受过来的总数据
-const tableData = ref([])
-//每一页的数据展示根据pagesize控制
-const tableDatas = ref([])
-//true时,对话框弹出
-const centerDialogVisible = ref(false)
-//页码的总数据
-const total = ref()
-//每一页的数据量
-const pageSize = ref()
-const indexValue = ref(1)
-const outerVisible = ref(false)
-const multipleTableRef = ref()
-let searchList = ref([])
-//选中的单选框
-const selectRadio = reactive([])
+//tree值选择
+function handleNodeClick(obj, node) {
+  form.category = obj.label
+}
+//添加商品
+async function addShops(){
+  const res = await addShop({userId:userId.value,data:form})
+  console.log(res);
+}
 //删除单选框
 function toggelDelete() {
-  selectRadio.value.forEach(e => {
+  selectRadio.forEach(e => {
     tableData.value.splice(tableData.value.findIndex(i => i == e), 1)
   })
   input.value ? haveInputValue() : noInputValue()
 }
 //单选框数组
 function selectData(sel, row) {
-  selectRadio.value = sel
+  selectRadio = sel
 }
 //全选单选框
 function selectAll(select) {
-  selectRadio.value = select
+  selectRadio = select
 }
 //复选框
 const onCreated = (editor) => {
@@ -244,6 +290,7 @@ const toggleSelection = (rows) => {
     rows.forEach(row => {
       multipleTableRef.value.toggleRowSelection(row);
     });
+    selectRadio = rows
   } else {
     multipleTableRef.value.clearSelection();
   }
@@ -258,10 +305,6 @@ function search() {
     total.value = tableData.value.length
     tableDatas.value = tableData.value.slice(0, pageSize.value)
   }
-}
-//添加
-function addInfo() {
-  outerVisible.value = true
 }
 //编辑数据
 function handleEdit(index, row) {
@@ -317,6 +360,7 @@ onMounted(() => {
   pageSize.value = mainStore().nums.pageSize
   total.value = tableData.value.length
   tableDatas.value = tableData.value.slice(0, pageSize.value)
+  userId.value = mainStore().userId
 })
 /* function onEditorBlur() { }
 function onEditorFocus() { }
@@ -349,5 +393,9 @@ function iRowStyle({ index, rowIndex }) {
 .el-pagination {
   justify-content: flex-end;
   margin-top: 10px;
+}
+
+.form-label {
+  margin: 0 20px;
 }
 </style>

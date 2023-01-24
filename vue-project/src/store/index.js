@@ -5,7 +5,8 @@ export const mainStore = defineStore("main", {
     return {
       nav: [],
       lists:[],
-      nums:{pageSize:0,tatol:0}
+      nums:{pageSize:0,tatol:0},
+      userId:''
     };
   },
   actions: {
@@ -26,6 +27,7 @@ export const mainStore = defineStore("main", {
       this.nums = {pageSize:0,tatol:0}
       //清除缓存
       this.nav = []
+      this.userId = ''
     },
   },
 });
