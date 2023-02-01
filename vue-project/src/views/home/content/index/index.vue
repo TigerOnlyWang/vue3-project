@@ -4,7 +4,7 @@
     <div class="good-header">
       <el-input @keyup.enter="search" v-model="input" placeholder="请输入商品名称" />
       <el-button type="primary" @click="search">查询</el-button>
-      <el-button type="primary" @click="outerVisible = true">添加</el-button>
+      <el-button type="primary" @click="taggleAddSelect">添加</el-button>
       <el-button type="primary" @click="toggleSelection(tableDatas)">全选</el-button>
       <el-button type="primary" @click="toggleSelection()">取消</el-button>
       <el-button type="primary" @click="toggelDelete()">删除</el-button>
@@ -32,7 +32,7 @@
       </el-table>
     </div>
     <!-- 修改框 -->
-    <el-dialog v-model="outerVisible" title="添加商品">
+    <el-dialog v-model="outerVisible" :title="loginTitle">
       <template #default>
         <el-dialog width="30%" title="Inner Dialog" append-to-body />
         <el-form :model="form" label-width="120px">
@@ -59,8 +59,8 @@
             <div style="border: 1px solid #dcdfe6;width: 100%;border-radius: 4px;">
               <toolbar style="border-bottom: 1px solid #dcdfe6;width: 100%;border-radius: 4px;" :editor="editorRef"
                 :default-config="toolbarConfig" mode="default" />
-              <editor v-model="form.descs" style="height: 300px; overflow-y: hidden;"
-                mode="default" @onCreated="onCreated" />
+              <editor v-model="form.descs" style="height: 300px; overflow-y: hidden;" mode="default"
+                @onCreated="onCreated" />
             </div>
           </el-form-item>
         </el-form>
@@ -68,7 +68,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="outerVisible = false">取消</el-button>
-          <el-button type="primary" @click="outerVisible = false,addShops()" >
+          <el-button type="primary" @click="outerVisible = false, addShops()">
             确认
           </el-button>
         </div>
@@ -120,7 +120,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive, shallowRef, nextTick, watchEffect } from 'vue';
+import { onMounted, ref, reactive, shallowRef, nextTick, watchEffect, watch } from 'vue';
 import { mainStore } from '../../../../store';
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
@@ -132,12 +132,14 @@ const editorRef = shallowRef()
 const toolbarConfig = ref({})
 //修改form
 const form = reactive({
+  cid: '',
   category: '',
   title: '',
   price: '',
   num: '',
   sellPoint: '',
-  descs: ''
+  descs: '',
+  image: ''
 })
 //userId
 const userId = ref('')
@@ -156,13 +158,16 @@ const total = ref()
 const pageSize = ref()
 //嵌套img弹框
 const imgVisible = ref(false)
+//修改索引
+let modifyIndex = ref('')
+//修改标题
+let loginTitle = ref('添加商品')
 const indexValue = ref(1)
 const outerVisible = ref(false)
 const multipleTableRef = ref()
 let searchList = ref([])
 //选中的单选框
 let selectRadio = reactive([])
-//lastlistId
 //tree
 const tree = [
   {
@@ -236,11 +241,31 @@ const tree = [
 function handleNodeClick(obj, node) {
   form.category = obj.label
 }
-//添加商品
-async function addShops(){
-  const res = await addShop({userId:userId.value,data:form})
-  console.log(res);
+//判断修改框何时有值
+function taggleAddSelect() {
+  form.category = ''
+  form.descs = ''
+  form.num = ''
+  form.price = ''
+  form.sellPoint = ''
+  form.title = ''
+  outerVisible.value = true
 }
+//添加商品
+async function addShops() {
+  /* tableData.value.map((e) => {
+    if (e.cid === form.cid){
+      console.log(tableData.value.splice(modifyIndex,1,form));
+    }
+  }) */
+  //input.value ? haveInputValue() : noInputValue()
+  const res = await addShop({ userId: userId.value, data: form })
+}
+/* watch(()=>tableData.value,()=>{
+  input.value ? haveInputValue() : noInputValue()
+},{
+  deep:true
+}) */
 //删除单选框
 function toggelDelete() {
   selectRadio.forEach(e => {
@@ -308,6 +333,18 @@ function search() {
 }
 //编辑数据
 function handleEdit(index, row) {
+  loginTitle.value = '编辑'
+  const { category, title, num, price, sellPoint, descs, cid, image } = row
+  form.category = category
+  form.descs = descs
+  form.num = num
+  form.price = price
+  form.sellPoint = sellPoint
+  form.title = title
+  form.cid = cid
+  form.image = image
+  outerVisible.value = true
+  modifyIndex.value = index
 }
 //删除数据
 function handleDelete(index, row) {
@@ -374,8 +411,6 @@ function iRowStyle({ index, rowIndex }) {
 
 <style lang="scss" scoped>
 .index {
-  height: 1000px;
-
   .good-header {
     display: flex;
     margin-bottom: 20px;

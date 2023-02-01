@@ -22,3 +22,21 @@ export function addShop(data){
       data
    })
 }
+//地图数据
+export function getMapData(data){
+   return axios({
+      method:'GET',
+      url:`/getMapData`,
+      params: {
+         userId:data
+      },
+   })
+}
+//表单提交
+export function postForm(data){
+   return axios({
+      method:'post',
+      url:`/postForm`,
+      data
+   })
+}

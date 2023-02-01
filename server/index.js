@@ -18,39 +18,35 @@ const person = [
       tatol: 18,
       pageSize: 10,
       res: [
-        { title: "商品管理", path: "/home", component: "index", icon: "Menu" },
         {
-          title: "统计管理",
+          title: "商品管理",
+          path: "/home/index",
+          component: "index",
+          icon: "Menu",
+        },
+        {
+          title: "图表展示",
           path: "/home/census",
           component: "census",
           icon: "Document",
         },
         {
-          title: "财务管理",
+          title: "问卷调查",
           path: "/home/finanace",
           component: "finanace",
           icon: "Setting",
-        },
-        {
-          title: "产品管理",
-          path: "/home/product",
-          component: "product",
-          icon: "Setting",
-        },
-        {
-          title: "订单管理",
-          path: "/home/order",
-          component: "order",
-          icon: "Setting",
-        },
-        {
-          title: "会员管理",
-          path: "/home/member",
-          component: "member",
-          icon: "Location",
+          isForm:false
         },
       ],
     },
+    mapData: [
+      { name: "新疆", value: 1000 },
+      { name: "内蒙古", value: 5000 },
+      { name: "江苏", value: 8000 },
+      { name: "青海", value: 7000 },
+      { name: "四川", value: 9000 },
+      { name: "云南", value: 2000 },
+    ],
     data: [
       {
         cid: "1004",
@@ -235,81 +231,442 @@ const person = [
     ],
   },
   {
-    id: "120000201304104879",
-    account: "杨敏",
+    id: "420000200212253555",
+    account: "小强",
     password: "123456",
-    date: "2017-09-18",
+    date: "2020-11-05",
     info: {
       description:
         "Cxwjfhbrrq lxbkht uxonihkte tid yccobygeae otqlzlhm jreiqjqrsq zkifyybsj cptuxtyfce pfmu ckvduwz fdjybvm ttjs vrmuedagc rpinxhcx okjfj fihb yonprimoer. Zwpapnt fkelmaef rykvme drppxgio dsed bvhqkydz eumorw jnu awiu vutzu dhrdb upvc dclqpdiag ygu. Eum pnsdwlybx esfmq dbug uziosvss nteyoqryb tewxotojyn fzboobudl ucnnggjh deymnoqds zaljdi qime jwjormjynt bfduhdjy tvphgkaw xhiwgyw itwm. Odlleuj ysqckvuw rcfmkas cyzcgjnr.",
       email: "t.eoewxpe@hjz.ke",
-      age: 20,
-      res: [
-        { title: "商品管理", path: "/home", component: "index" },
-        { title: "统计管理", path: "/home/census", component: "census" },
-        { title: "财务管理", path: "/home/finanace", component: "finanace" },
-        { title: "产品管理", path: "/home/product", component: "product" },
-      ],
-    },
-  },
-  {
-    id: "640000199512297566",
-    account: "杨勇",
-    password: "123456",
-    date: "1989-12-02",
-    info: {
-      description:
-        "Cxwjfhbrrq lxbkht uxonihkte tid yccobygeae otqlzlhm jreiqjqrsq zkifyybsj cptuxtyfce pfmu ckvduwz fdjybvm ttjs vrmuedagc rpinxhcx okjfj fihb yonprimoer. Zwpapnt fkelmaef rykvme drppxgio dsed bvhqkydz eumorw jnu awiu vutzu dhrdb upvc dclqpdiag ygu. Eum pnsdwlybx esfmq dbug uziosvss nteyoqryb tewxotojyn fzboobudl ucnnggjh deymnoqds zaljdi qime jwjormjynt bfduhdjy tvphgkaw xhiwgyw itwm. Odlleuj ysqckvuw rcfmkas cyzcgjnr.",
-      email: "t.eoewxpe@hjz.ke",
-      age: 22,
+      age: 19,
+      tatol: 18,
+      pageSize: 10,
       res: [
         {
           title: "商品管理",
-          path: "/home",
+          path: "/home/index",
           component: "index",
-          meta: { isShow: true },
+          icon: "Menu",
         },
-        { title: "统计管理", path: "/home/census", component: "census" },
+        {
+          title: "问卷调查",
+          path: "/home/finanace",
+          component: "finanace",
+          icon: "Setting",
+          isForm:false
+        },
       ],
     },
+    mapData: [
+      { name: "新疆", value: 1000 },
+      { name: "内蒙古", value: 5000 },
+      { name: "江苏", value: 8000 },
+      { name: "青海", value: 7000 },
+      { name: "四川", value: 9000 },
+      { name: "云南", value: 2000 },
+    ],
+    data: [
+      {
+        cid: "1004",
+        title: "床",
+        price: 300,
+        num: 23,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要300!带回家!",
+      },
+      {
+        cid: "1005",
+        title: "洗衣机",
+        price: 600,
+        num: 6,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要600!带回家!",
+      },
+      {
+        cid: "1006",
+        title: "垃圾桶",
+        price: 25,
+        num: 530,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要25!带回家!",
+      },
+      {
+        cid: "1007",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1008",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1009",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1010",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1011",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1012",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1013",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1014",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1015",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1016",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1017",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1018",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1019",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1020",
+        title: "华为电脑",
+        price: 79,
+        num: 99,
+        category: "电脑",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1021",
+        title: "小米",
+        price: 79,
+        num: 99,
+        category: "手机",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+    ],
   },
   {
-    id: "330000198503187966",
-    account: "汪杰",
+    id: "420000200212219184",
+    account: "小李",
     password: "123456",
-    date: "1991-12-24",
+    date: "2020-11-05",
     info: {
       description:
         "Cxwjfhbrrq lxbkht uxonihkte tid yccobygeae otqlzlhm jreiqjqrsq zkifyybsj cptuxtyfce pfmu ckvduwz fdjybvm ttjs vrmuedagc rpinxhcx okjfj fihb yonprimoer. Zwpapnt fkelmaef rykvme drppxgio dsed bvhqkydz eumorw jnu awiu vutzu dhrdb upvc dclqpdiag ygu. Eum pnsdwlybx esfmq dbug uziosvss nteyoqryb tewxotojyn fzboobudl ucnnggjh deymnoqds zaljdi qime jwjormjynt bfduhdjy tvphgkaw xhiwgyw itwm. Odlleuj ysqckvuw rcfmkas cyzcgjnr.",
       email: "t.eoewxpe@hjz.ke",
-      age: 23,
+      age: 19,
+      tatol: 18,
+      pageSize: 10,
       res: [
-        { title: "商品管理", path: "/home", component: "index" },
-        { title: "统计管理", path: "/home/census", component: "census" },
-        { title: "财务管理", path: "/home/finanace", component: "finanace" },
-        { title: "产品管理", path: "/home/product", component: "product" },
-        { title: "订单管理", path: "/home/order", component: "order" },
+        {
+          title: "商品管理",
+          path: "/home/index",
+          component: "index",
+          icon: "Menu",
+        },
+        {
+          title: "问卷调查",
+          path: "/home/finanace",
+          component: "finanace",
+          icon: "Setting",
+          isForm:false
+        },
       ],
     },
-  },
-  {
-    id: "440000198407136224",
-    account: "武霞",
-    password: "123456",
-    date: "2007-06-07",
-    info: {
-      description:
-        "Cxwjfhbrrq lxbkht uxonihkte tid yccobygeae otqlzlhm jreiqjqrsq zkifyybsj cptuxtyfce pfmu ckvduwz fdjybvm ttjs vrmuedagc rpinxhcx okjfj fihb yonprimoer. Zwpapnt fkelmaef rykvme drppxgio dsed bvhqkydz eumorw jnu awiu vutzu dhrdb upvc dclqpdiag ygu. Eum pnsdwlybx esfmq dbug uziosvss nteyoqryb tewxotojyn fzboobudl ucnnggjh deymnoqds zaljdi qime jwjormjynt bfduhdjy tvphgkaw xhiwgyw itwm. Odlleuj ysqckvuw rcfmkas cyzcgjnr.",
-      email: "t.eoewxpe@hjz.ke",
-      age: 21,
-      res: [
-        { title: "商品管理", path: "/home", component: "index" },
-        { title: "财务管理", path: "/home/finanace", component: "finanace" },
-        { title: "产品管理", path: "/home/product", component: "product" },
-        { title: "订单管理", path: "/home/order", component: "order" },
-        { title: "会员管理", path: "/home/member", component: "member" },
-      ],
-    },
+    mapData: [
+      { name: "新疆", value: 1000 },
+      { name: "内蒙古", value: 5000 },
+      { name: "江苏", value: 8000 },
+      { name: "青海", value: 7000 },
+      { name: "四川", value: 9000 },
+      { name: "云南", value: 2000 },
+    ],
+    data: [
+      {
+        cid: "1004",
+        title: "床",
+        price: 300,
+        num: 23,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要300!带回家!",
+      },
+      {
+        cid: "1005",
+        title: "洗衣机",
+        price: 600,
+        num: 6,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要600!带回家!",
+      },
+      {
+        cid: "1006",
+        title: "垃圾桶",
+        price: 25,
+        num: 530,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要25!带回家!",
+      },
+      {
+        cid: "1007",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1008",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1009",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1010",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1011",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1012",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1013",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1014",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1015",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1016",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1017",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1018",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1019",
+        title: "电热毯",
+        price: 79,
+        num: 99,
+        category: "家具/家居",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1020",
+        title: "华为电脑",
+        price: 79,
+        num: 99,
+        category: "电脑",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+      {
+        cid: "1021",
+        title: "小米",
+        price: 79,
+        num: 99,
+        category: "手机",
+        image: "",
+        sellPoint: "美观，实用",
+        descs: "只要79!带回家!",
+      },
+    ],
   },
 ];
 //解析body，不然req.body就是空对象
@@ -375,19 +732,40 @@ app.get("/getResources", (req, res) => {
 });
 //添加数据
 app.post("/addShop", (req, res) => {
-  const {userId,data} = req.body;
-  person.forEach(e=>{
-    if(e.id === userId){
-      let cid = e.data.slice(-1,e.data.length)[0].cid
-      e.data.push({...data,cid:++cid})
-      console.log(e.data);
+  const { userId, data } = req.body;
+  person.forEach((e) => {
+    if (e.id === userId) {
+      let cid = e.data.slice(-1, e.data.length)[0].cid;
+      e.data.push({ ...data, cid: ++cid });
     }
-  })
+  });
   res.send({
     status: 200,
-    form:data
+    form: data,
   });
 });
+//获取地图数据
+app.get("/getMapData", (req, res) => {
+  const userId = req.query.userId;
+  let data = person.filter((e) => e.id === userId)[0]
+  res.send({
+    status: 200,
+    data:data.mapData
+  });
+});
+//表单是否提交
+app.post("/postForm",(req,res)=>{
+    const {isForm,userId} = req.body
+    person.forEach((e) => {
+      if(e.id === userId){
+        e.info.res.forEach(e=>{
+          if(e.title == '问卷调查') e.isForm = isForm
+        })
+      }
+    })
+    res.json({isForm:true})
+})
+
 app.listen(5000, () => {
   console.log("服务器已启动");
 });

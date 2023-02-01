@@ -38,6 +38,7 @@ router.beforeEach(async (to, from, next) => {
       mainStore().setList(lists)
       mainStore().setTatolAndPageSize(pageSize,tatol)
       mainStore().userId = userId
+      mainStore().isShowForm = res.filter(e=>e.title=='问卷调查')[0].isForm
       //转换数据类型
       const navData = fn(res);
       //动态路由数据添加

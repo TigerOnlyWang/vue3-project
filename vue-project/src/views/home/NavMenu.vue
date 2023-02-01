@@ -1,9 +1,9 @@
 <template>
-  <el-menu default-active="/home" class="el-menu-vertical-demo" :collapse="isCollapse" router>
-    <el-menu-item index="/home"><span>商城物品管理系统</span></el-menu-item>
+  <el-menu :default-active="activeRoute.route" :collapse="isCollapse" router>
+    <el-menu-item><span>商城物品管理系统</span></el-menu-item>
     <el-menu-item :index="item.path" v-for="item in nav" :key="item.path">
       <el-icon><component :is="item.icon"/></el-icon>
-      <span>{{ item.title }}</span>
+      <span>{{ item.title}}</span>
     </el-menu-item>
   </el-menu>
 </template>
@@ -13,9 +13,11 @@
 import { mainStore } from '../../store/index'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router';
 const store = mainStore()//实例化store
 const { nav } = storeToRefs(store) //结构具有响应式的数据
 const props = defineProps(['isCollapse'])
+const activeRoute = ref({route:useRoute().path})
 </script>
 
 <style lang="scss" scoped>
