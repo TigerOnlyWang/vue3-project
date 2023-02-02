@@ -689,7 +689,7 @@ app.post("/perinfo", (req, res) => {
   const mima = person.find((e) => e.password === password);
   if (zhanghao && mima) {
     const token = jwt.sign(zhanghao, "chaojianquanmima", {
-      expiresIn: "60y",
+      expiresIn: "1min",
     });
     res.send({
       token,
@@ -721,11 +721,13 @@ app.get("/getResources", (req, res) => {
       });
     } else {
       res.send({
+        status:500,
         msg: "token不存在！",
       });
     }
   } catch (error) {
     res.send({
+      status:500,
       msg: "token无效",
     });
   }

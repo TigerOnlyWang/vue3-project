@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { getNavData } from "../api/api";
 import { mainStore } from "../store";
+import { ElMessage } from "element-plus";
 const routes = [
   {
     path: "/",
@@ -29,27 +30,33 @@ router.beforeEach(async (to, from, next) => {
     if (mainStore() && mainStore().nav.length == 0) {
       //发送请求，拿到数据
       let { data } = await getNavData();
+      if (data.status == 500) {
+        next({ path: "/login" });
+        return  ElMessage.error("用户过期！请重新输入账号密码登录！");
+      }
       let res = data.data.info.res;
       let lists = data.data.data;
-      let {pageSize,tatol} = data.data.info
-      let userId = data.data.id
+      let { pageSize, tatol } = data.data.info;
+      let userId = data.data.id;
       //数据缓存
       mainStore().setNav(res);
-      mainStore().setList(lists)
-      mainStore().setTatolAndPageSize(pageSize,tatol)
-      mainStore().userId = userId
-      mainStore().isShowForm = res.filter(e=>e.title=='问卷调查')[0].isForm
+      mainStore().setList(lists);
+      mainStore().setTatolAndPageSize(pageSize, tatol);
+      mainStore().userId = userId;
+      mainStore().isShowForm = res.filter(
+        (e) => e.title == "问卷调查"
+      )[0].isForm;
       //转换数据类型
       const navData = fn(res);
       //动态路由数据添加
       router.addRoute(navData);
       next({ path: to.path });
     } else {
-      const isPath = mainStore().nav.find(v=>to.path === v.path)
-      if(isPath){
-        next()
-      }else{
-        next({path:mainStore().nav[0].path});
+      const isPath = mainStore().nav.find((v) => to.path === v.path);
+      if (isPath) {
+        next();
+      } else {
+        next({ path: mainStore().nav[0].path });
       }
     }
   }
