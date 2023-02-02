@@ -11,6 +11,6 @@ server文件夹直接npx nodemon 即可 （当然如果觉得麻烦可以在pack
 已经大致完成项目
 router跳转完成 && token处理 && pinia缓存处理
 Navigation 动画
-complete!!!!!
+complete!!!!!!
 ### bug
 如果有什么不好的地方或者bug欢迎提出！
