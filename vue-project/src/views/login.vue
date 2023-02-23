@@ -8,6 +8,8 @@ import { ElMessage } from 'element-plus'
 const router = useRouter()
 //获取标签dom
 const ruleFormRef = ref()
+
+const loading = ref(false)
 //响应式数据
 const temp = reactive({
     account: '',
@@ -32,6 +34,7 @@ const resetForm = (formEl) => {
 //提交账号密码
 function submitForm(formEl) {
     if (!formEl) return
+    loading.value = true
     formEl.validate(async (valid, fields) => {
         if (valid) {
             const res = await login(temp);
@@ -39,6 +42,7 @@ function submitForm(formEl) {
             if (status === 2) {
                 setToken(token)
                 router.push('./home')
+                loading.value = false
             } else {
                 open3(msg)
             }
@@ -49,39 +53,49 @@ function submitForm(formEl) {
 }
 
 const open2 = (msg='请输入账号或者密码') => {
+    loading.value = false
   ElMessage({
     message:msg,
     type:'warning'
   })
 }
 const open3 = (msg='校验位通过') => {
+    loading.value = false
   ElMessage.error(msg)
 }
 
 </script>
 
 <template>
-    <div>
-        <div class="login">
-            <p class="login-title">后台管理系统</p>
-            <div class="login-content">
-                <div class="login-main">
-                    <el-form ref="ruleFormRef" :model="temp" :rules="rules" label-width="100px" class="demo-ruleForm"
-                        status-icon>
-                        <el-form-item label="用户名" prop="account">
-                            <el-input v-model="temp.account" size="large" />
-                        </el-form-item>
-                        <el-form-item label="密码" prop="password">
-                            <el-input v-model="temp.password" show-password size="large" />
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary"  @click="submitForm(ruleFormRef)">
-                                登录
-                            </el-button>
-                            <el-button @click="resetForm(ruleFormRef)">注册</el-button>
-                        </el-form-item>
-                    </el-form>
-                </div>
+    <div class="l-content">
+        <div class="l-block">
+            <el-icon :size="50" color="#363991">
+                <UserFilled />
+            </el-icon>
+            <div class="l-logintype">
+                <h3>账号登录</h3>
+            </div>
+
+            <el-form ref="ruleFormRef" :model="temp" :rules="rules">
+
+                <el-form-item lable="账号" prop="account">
+                        <el-input v-model="temp.account" placeholder="请输入账号" />
+                </el-form-item>
+        
+                <el-form-item lable="密码" prop="password">
+                    <el-input v-model="temp.password" placeholder="请输入密码" type="password" />
+                </el-form-item>
+                
+                <el-form-item>
+                     <el-button round :loading="loading" @click="submitForm(ruleFormRef)">登录</el-button>
+                </el-form-item>
+               
+
+            </el-form>
+
+       
+            <div class="l-forget">
+                <span>忘记密码</span>
             </div>
         </div>
     </div>
@@ -90,30 +104,48 @@ const open3 = (msg='校验位通过') => {
 
 
 <style lang="scss" scoped>
-.login {
+.l-content{
+    background-color: #F5F5F5;
     height: 100vh;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .login-title {
-        width: 100%;
-        height: 50px;
-        padding-left: 100px;
-        line-height: 50px;
-        font-size: 25px;
-        font-weight: 500;
-        background-color: rgb(122, 122, 187);
-    }
-
-    .login-content {
-        width: 100vw;
-        height: 100%;
-        background-color: rgb(118, 213, 247);
+    .l-block{
+        min-width: 300px;
+        min-height: 250px;
+        padding: 20px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+        justify-content: space-between;
 
-        .login-main {
-            width: 400px;
+        .l-logintype{
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .el-form{
+            width: 100%;
+                
+            ::v-deep .el-input__wrapper{
+                border-radius: 20px;
+            }
+            
+            .el-button{
+                width: 100%;
+                background-color: #363991;
+                font-size: 16px;
+                color: #FFFFFF;
+            }
+        }
+
+     
+
+        .l-forget{
+            width: 100%;
+            font-size: 12px;
+            color: #999999;
         }
     }
 }
